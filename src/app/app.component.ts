@@ -16,7 +16,7 @@ export class AppComponent {
   constructor(private heroService: HeroService) {}
 
   ngOnInit() {
-    this.heroes = this.heroService.getHeroes();
+    this.heroService.getHeroes().then((heroes) => this.heroes = heroes);
   }
 
   onHeroSelected(hero: Hero) {
