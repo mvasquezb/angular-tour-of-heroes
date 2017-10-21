@@ -17,13 +17,16 @@ export class HeroService {
       .catch(this.handleError);
   }
 
+  getHero(id: number): Promise<Hero> {
+    const url = `${this.heroesUrl}/${id}`;
+    return this.http.get(url)
+      .toPromise()
+      .then((response) => response.json() as Hero)
+      .catch(this.handleError);
+  }
+
   private handleError(error: any): Promise<any> {
     console.log(error);
     return Promise.reject(error.message || error);
-  }
-
-  getHero(id: number): Promise<Hero> {
-    return this.getHeroes()
-      .then((heroes) => heroes.find((hero) => hero.id === id));
   }
 }
